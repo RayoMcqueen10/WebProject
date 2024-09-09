@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='/css/all.min.css')}}">
+    </head>
+<body>
+    {% block contenido %}{% endblock %}
+     
+
+     
+      <script src="/js/bootstrap.bundle.min.js"></script>
+      <script src="/js/all.min.js"></script>
+      <script src="/js/scrollreveal.min.js"></script>
+      <script src="/css/all.min.css"></script>
+      
+</body>
+</html>
