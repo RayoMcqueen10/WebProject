@@ -6,7 +6,7 @@ gamezone = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@gamezone.route('/signup)')
+@gamezone.route('/signup')
 def signup():
     return render_template('signup.html')
 
