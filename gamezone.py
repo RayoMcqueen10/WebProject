@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 
+
 gamezone = Flask(__name__)
 
 @gamezone.route('/')
