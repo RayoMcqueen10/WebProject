@@ -8,6 +8,6 @@ class ConfigDevelopment(Config):
     MYSQL_PASSWORD  = 'mysql'
     MYSQL_DB        = 'gamezone'
 
-config ={
-    'developmnet': ConfigDevelopment
+config = {
+    'development': ConfigDevelopment
 } 
