@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-09-2024 a las 16:07:52
+-- Tiempo de generación: 26-09-2024 a las 16:53:53
 -- Versión del servidor: 5.7.44-log
 -- Versión de PHP: 7.4.9
 
@@ -44,7 +44,8 @@ CREATE TABLE `usuario` (
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `correo` (`correo`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
