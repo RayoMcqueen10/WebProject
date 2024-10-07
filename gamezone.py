@@ -4,11 +4,17 @@ from flask_login import LoginManager,login_user,logout_user
 from config import config
 from werkzeug.security import generate_password_hash
 import datetime
+from models.ModelUser import ModelUser
+from models.entities.User import User
 
 
 gamezone = Flask(__name__)
 db = MySQL(gamezone)
-#adminSession = LoginManager(gamezone)
+adminSession = LoginManager(gamezone)
+
+@adminSession.user_loader
+def signingUser(id):
+    return modelUser.get_by_id(db,id) 
 
 @gamezone.route('/')
 def home():
