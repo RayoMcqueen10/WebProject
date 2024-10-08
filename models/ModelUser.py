@@ -1,7 +1,7 @@
- from models.entities.User import User 
- from flask_login import login_user
+from models.entities.User import User 
+from flask_login import login_user
 
- class ModelUser:
+class ModelUser:
     @classmethod
     def signin(self,db,usuario):
         try:
@@ -18,7 +18,7 @@
     @classmethod
     def get_by_id(self,db,id):
         try:
-            selUsuario = db.connection.cursor()
+            SelUsuario = db.connection.cursor()
             SelUsuario.execute("SELECT * FROM usuario WHERE id = %s",(id,))
             u = SelUsuario.fetchone()
             if u is not None:

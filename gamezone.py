@@ -14,7 +14,7 @@ adminSession = LoginManager(gamezone)
 
 @adminSession.user_loader
 def signingUser(id):
-    return modelUser.get_by_id(db,id) 
+    return ModelUser.get_by_id(db,id) 
 
 @gamezone.route('/')
 def home():
@@ -34,6 +34,25 @@ def signup():
     else:    
         return render_template('signup.html',methods = {'GET','POST'})
 
+@gamezone.route('/signin',methods = ['GET','POST'])
+def signin():
+    if request.method == 'POST':
+        usuario = User(0, None, request.form['correo'], request.form['clave'], None, None)
+        usuarioAutenticado =  ModelUser.signin(db, usuario)
+        if usuarioAutenticado is not None :
+            login_user(usuarioAutenticado)
+            if usuarioAutenticado.clave:
+                if usuarioAutenticado.perfil == 'A':
+                    return render_template('admin.html')
+                else:
+                    return render_template('user.html')
+            else:
+                return 'Contraseña Incorrecta'
+        else:
+            return 'Usuario Inexistente'    
+    else: 
+        return render_template('signin.html')
+
 if __name__ == '__main__':  
-   gamezone.config.from_object(config['development'])
-   gamezone.run(port=3300)  
+    gamezone.config.from_object(config['development'])
+    gamezone.run(port=3300)  
