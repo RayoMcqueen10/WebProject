@@ -52,6 +52,10 @@ def signin():
             return 'Usuario Inexistente'    
     else: 
         return render_template('signin.html')
+@gamezone.route('/sigout',methods=['GET','POST'])
+def signout():
+    logout_user()
+    return render_template('home.html')
 
 if __name__ == '__main__':  
     gamezone.config.from_object(config['development'])
