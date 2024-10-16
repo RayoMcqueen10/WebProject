@@ -8,19 +8,19 @@ from models.ModelUser import ModelUser
 from models.entities.User import User
 
 
-gamezone = Flask(__name__)
-db = MySQL(gamezone)
-adminSession = LoginManager(gamezone)
+gamezoneApp = Flask(__name__)
+db = MySQL(gamezoneApp)
+adminSession = LoginManager(gamezoneApp)
 
 @adminSession.user_loader
 def signingUser(id):
     return ModelUser.get_by_id(db,id) 
 
-@gamezone.route('/')
+@gamezoneApp.route('/')
 def home():
     return render_template('home.html')
 
-@gamezone.route('/signup')
+@gamezoneApp.route('/signup')
 def signup():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -34,7 +34,7 @@ def signup():
     else:    
         return render_template('signup.html',methods = {'GET','POST'})
 
-@gamezone.route('/signin',methods = ['GET','POST'])
+@gamezoneApp.route('/signin',methods = ['GET','POST'])
 def signin():
     if request.method == 'POST':
         usuario = User(0, None, request.form['correo'], request.form['clave'], None, None)
@@ -52,11 +52,11 @@ def signin():
             return 'Usuario Inexistente'    
     else: 
         return render_template('signin.html')
-@gamezone.route('/sigout',methods=['GET','POST'])
+@gamezoneApp.route('/sigout',methods=['GET','POST'])
 def signout():
     logout_user()
     return render_template('home.html')
 
 if __name__ == '__main__':  
-    gamezone.config.from_object(config['development'])
-    gamezone.run(port=3300)  
+    gamezoneApp.config.from_object(config['development'])
+    gamezoneApp.run(port=3300)       
