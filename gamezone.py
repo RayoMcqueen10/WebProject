@@ -16,7 +16,7 @@ adminSession = LoginManager(gamezoneApp)
 def signingUser(id):
     return ModelUser.get_by_id(db,id) 
 
-@gamezoneApp.route('/')
+@gamezonApp.route('/')
 def home():
     return render_template('home.html')
 
