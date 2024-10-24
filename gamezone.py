@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 from flask_login import LoginManager,login_user,logout_user
 from config import config
 from werkzeug.security import generate_password_hash
-import datetime
+import datetime 
 from models.ModelUser import ModelUser
 from models.entities.User import User
 
@@ -20,7 +20,7 @@ def signingUser(id):
 def home():
     return render_template('home.html')
 
-@gamezoneApp.route('/signup')
+@gamezoneApp.route('/signup', methods  = ['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         nombre = request.form['nombre']
