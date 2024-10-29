@@ -57,6 +57,14 @@ def signout():
     logout_user()
     return render_template('home.html')
 
+@gamezoneApp.route('/sUsuario', methods = ['GET', 'POST'])
+def sUsuario():
+    selUsuario =  db.connection.cursor()
+    selUsuario.execute("SELECT * FROM usuario")
+    u = selUsuario.fetchall()
+
+    return render_template('usuarios.html',usuarios = u)
+
 if __name__ == '__main__':  
     gamezoneApp.config.from_object(config['development'])
     gamezoneApp.run(port=3300)       
