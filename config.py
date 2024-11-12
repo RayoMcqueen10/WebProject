@@ -3,10 +3,16 @@ class Config:
     DEBUG      = True
 
 class ConfigDevelopment(Config):
-    MYSQL_HOST      = 'localhost'
-    MYSQL_USER      = 'root'
+    '''MYSQL_HOST      = 'gamezone.mysql.pythonanywhere-services.com'
+    MYSQL_USER      = 'gamezone'
     MYSQL_PASSWORD  = 'mysql'
-    MYSQL_DB        = 'gamezone'
+    MYSQL_DB        = 'gamezone' '''
+    #pythonanywhere
+    MYSQL_HOST      = 'gamezone.mysql.pythonanywhere-services.com'
+    MYSQL_USER      = 'gamezone'
+    MYSQL_PASSWORD  = '77Antonio77'
+    MYSQL_DB        = 'gamezone$gamezone'
+
 
 config = {
     'development': ConfigDevelopment
