@@ -1,0 +1,178 @@
+{% extends 'layout.html'%}
+{% block titulo %}Productos{% endblock %}
+{% block contenido %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01edfe;"></i>
+        NV
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Operaciones
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
+              <li><a class="dropdown-item" href="/sProducto">Productos</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" >{{current_user.nombre}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket" style="color: #00e9fa;"></i></a>
+          </li>
+        </ul> 
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% with mensajes  = get_flashed_messages() %}
+    {% if mensajes %}
+    {% for m in mensajes %}
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div>
+        {{m}}
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+          <!-- Button insert-->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insert">
+  <i class="fa-solid fa-circle-plus fa-2xl"></i>
+</button>
+
+<!-- Modal insert -->
+<div class="modal fade" id="insert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/iProducto" method="post">
+      <div class="modal-body">
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" name="nombre" class="form-control" id="nombre">
+        </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Description</label>
+            <input type="text" name="descripcion" class="form-control" id="inputEmail4">
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Precio</label>
+            <input type="text" name="precio" class="form-control" id="inputEmail4">
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Existencias</label>
+            <input type="text" name="existencias" class="form-control" id="inputEmail4">
+          </div>          
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Imagen</label>
+            <input type="text" name="imagen" class="form-control" id="inputPassword4">
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Tipo de producto</label>
+            <select name="categoria" class="form-select" aria-label="Default select example">
+              <option selected>Selecciona una categoria.</option>
+              <option value="A">Play Station</option>
+              <option value="U">Xbox</option>
+            </select>
+          </div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for  producto in productos %}
+      <div class="col">
+        <div class="card">
+          <img src="/static/img/{{producto.6}}" class="card-img-top" alt="Ups no se encuentra la imagen chiquito papi">
+          <div class="card-body">
+            <h5 class="card-title">{{producto.1}}</h5>
+            <p class="card-text">{{producto.2}}</p>
+            <p class="card-text">{{producto.3}}</p>
+              <!-- Button update-->
+              <button type="button" class="btn btn-outline-black" data-bs-toggle="modal" data-bs-target="#update{{producto.0}}">
+                <i class="fa-solid fa-pen-to-square fa-xl" style="color: #30e0f8;"></i>
+              </button>
+
+              <!-- Modal update -->
+              <div class="modal fade" id="update{{producto.0}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar producto guapo</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/iProducto" method="post">
+                    <div class="modal-body">
+                      <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" name="nombre" value="{{producto.1}}" class="form-control" id="nombre">
+                      </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Description</label>
+                          <input type="text" name="descripcion" value="{{producto.2}}" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Precio</label>
+                          <input type="text" name="precio" value="{{producto.3}}" class="form-control" id="inputEmail4">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Existencias</label>
+                          <input type="text" name="existencias" value="{{producto.5}}" class="form-control" id="inputEmail4">
+                        </div>          
+                        <div class="col-md-6">
+                          <label for="inputPassword4" class="form-label">Imagen</label>
+                          <input type="text" name="imagen" value="{{producto.6}}" class="form-control" id="inputPassword4">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputPassword4" class="form-label">Tipo de producto</label>
+                          <select name="categoria" class="form-select" aria-label="Default select example">
+                            <option selected>Selecciona una plataforma.</option>
+                            <option value="A">Play Station</option>
+                            <option value="U">Xbox</option>
+                          </select>
+                        </div>
+                      </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

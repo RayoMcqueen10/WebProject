@@ -60,46 +60,129 @@
         </th>
       </tr>
       
-  <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <!-- Modal insert -->
+ <div class="modal fade" id="insert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form action="/iUsuario" method="post">
+    <div class="modal-body">
+      <div class="col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" class="form-control" id="nombre">
+      </div>
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="email" name="correo" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Password</label>
+          <input type="password" name="clave" class="form-control" id="inputPassword4">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Perfil</label>
+          <select name="perfil" class="form-select" aria-label="Default select example">
+            <option selected>Selecciona un perfil guapote.</option>
+            <option value="A">Administrador :3</option>
+            <option value="U">Usuario</option>
+          </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </div>
+    </form>
+  </div>
+  </div>
+  </div>
+</thead>
+<tbody>
+    {% for u in usuarios %}
+  <tr>
+    <th scope="row">{{u.0}}</th>
+    <td>{{u.1}}</td>
+    <td>{{u.2}}</td>
+    <td>{{u.4}}</td>
+    <td>{{u.5}}</td>
+    <td>
+       <!-- Button update -->
+       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{u.0}}">
+        <i class="fa-solid fa-pen-to-square fa-beat" style="color: #6beeff;"></i>
+      </button>
+    </td>
+    <td>
+                        <!-- Button delete -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete{{u.0}}">
+        <i class="fa-solid fa-trash-can" style="color: #49fafd;"></i>
+      </button>
+    </td>
+  </tr>
+   <!-- Modal update -->
+   <div class="modal fade" id="update{{u.0}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar usuario</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form action="/uUsuario/{{u.0}}" method="post">
       <div class="modal-body">
-        ...
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" name="nombre" value="{{u.1}}" class="form-control" id="nombre">
+        </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" name="correo" value="{{u.2}}" class="form-control" id="inputEmail4">
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <input type="password" name="clave" class="form-control" id="inputPassword4">
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Perfil</label>
+            <select name="perfil" class="form-select" aria-label="Default select example">
+              <option >Selecciona un perfil guapote.</option>
+              <option {% if u.5 == 'A' %} selected {% endif %} value="A">Administrador :3</option>
+              <option {% if u.5 == 'U' %} selected {% endif %} value="U">Usuario</option>
+            </select>
+          </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Editar usuario</button>
       </div>
+      </form>
     </div>
+    </div>
+    </div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="delete{{u.0}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Usuario</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
+  <form action="/dUsuario/{{u.0}}">
+  <div class="modal-body">
+    <p><i class="fa-solid fa-circle-exclamation fa-bounce fa-2xl" style="color: #ff0026;"></i>¿Estas seguro de querer eliminar el usuario :(? {{u.1}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-danger">Eliminar Usuario</button>
+  </div>
+</form>
 </div>
-    </thead>
-    <tbody>
-      {% if usuarios != None  %}
-      {% for u in usuarios %}
-      <tr>
-        <th scope="row">{{u.0}}</th>
-        <td>{{u.1}}</td>
-        <td>{{u.2}}</td>
-        <td>{{u.4}}</td>
-        <td>{{u.5}}</td>
-        <td>{{u.&nbsp;}}</td>
-        <td>{{u.&nbsp;}}</td>
-      </tr>
-      {% endfor %}
-      {% else %}
-      <tr>
-        <td colspan="7">
-              Registro no encontrado
-        </td>
-      </tr>
-      {% endif %}
-    </tbody>
-  </table>
 </div>
-  {% endblock %}
+</div>
+  {% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
