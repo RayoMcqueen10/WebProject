@@ -10,10 +10,20 @@ class ConfigDevelopment(Config):
     #pythonanywhere
     MYSQL_HOST      = 'gamezone.mysql.pythonanywhere-services.com'
     MYSQL_USER      = 'gamezone'
-    MYSQL_PASSWORD  = '77Antonio77'
+    MYSQL_PASSWORD  = '777Pedro777'
     MYSQL_DB        = 'gamezone$gamezone'
 
-
+class ConfigMail(Config):
+    MAIL_SERVER     = 'smtp.gmail.com'
+    MAIL_PORT       = 587
+    MAIL_USE_TLS    = True
+    MAIL_USE_SSL    = False
+    MAIL_USERNAME   = 'pedro.cernas1877@alumnos.udg.mx'
+    MAIL_PASSWORD   = 'uwgc efsj rtqq qxkr'
+    MAIL_DEFAULT_SENDER = 'pedro.cernas1877@alumnos.udg.mx'
+    MAIL_ASCII_ATACHMENTS = True
+    
 config = {
-    'development': ConfigDevelopment
+    'development': ConfigDevelopment,
+    'mail'       : ConfigMail
 } 

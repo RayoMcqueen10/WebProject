@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for,request,redirect, session
 from flask_mysqldb import MySQL
 from flask_login import LoginManager,login_user,logout_user
+from flask_mail import Mail, Message
 from config import config
 from werkzeug.security import generate_password_hash
 import datetime 
@@ -8,15 +9,18 @@ from models.ModelUser import ModelUser
 from models.entities.User import User
 
 
-gamezone = Flask(__name__)
-db=MySQL(gamezone)
-adminSesion = LoginManager(gamezone)
+gamezoneApp = Flask(__name__)
+db=MySQL(gamezoneApp)
+#phytonanywhere
+gamezoneApp.config.from_object(config['development'])
+gamezoneApp.config.from_object(config['mail'])
+adminSesion = LoginManager(gamezoneApp)
 
 @adminSesion.user_loader
 def cargarUsuario(id):
     return ModelUser.get_by_id(db, id)
 
-@gamezone.route('/')
+@gamezoneApp.route('/')
 def home():
     '''if session['NombreU']:
         if session['PerfilU'] == 'A':
@@ -25,7 +29,7 @@ def home():
             return render_template('user.html')'''
     return render_template('home.html')
 
-@gamezone.route('/signup',methods=['GET','POST'])
+@gamezoneApp.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method=='POST':
         nombre=request.form['nombre']
@@ -41,7 +45,7 @@ def signup():
         return render_template('signup.html')
         
     
-@gamezone.route('/signin', methods=['GET','POST'])
+@gamezoneApp.route('/signin', methods=['GET','POST'])
 def signin():
     if request.method == 'POST':
         usuario = User(0, None, request.form['correo'], request.form['clave'], None,  None)
@@ -64,12 +68,12 @@ def signin():
     else:
         return render_template('signin.html')
 
-@gamezone.route('/signout', methods=['GET', 'POST'])
+@gamezoneApp.route('/signout', methods=['GET', 'POST'])
 def signout():
     logout_user()
     return render_template('home.html')
 
-@gamezone.route('/sUsuario', methods=['GET','POST'])
+@gamezoneApp.route('/sUsuario', methods=['GET','POST'])
 def sUsuario():
     selUsuario = db.connection.cursor()
     selUsuario.execute("SELECT * FROM usuario")
@@ -77,7 +81,7 @@ def sUsuario():
     selUsuario.close()
     return render_template('usuarios.html', usuarios = u)
 
-@gamezone.route('/iUsuario', methods=['GET', 'POST'])
+@gamezoneApp.route('/iUsuario', methods=['GET', 'POST'])
 def iUsuario():
     nombre = request.form['nombre']
     correo = request.form['correo']
@@ -91,7 +95,7 @@ def iUsuario():
     flash('usuario creado')
     return redirect('/sUsuario')
 
-@gamezone.route('/uUsuario/<int:id>', methods=['GET', 'POST'])
+@gamezoneApp.route('/uUsuario/<int:id>', methods=['GET', 'POST'])
 def uUsuario(id):
     nombre = request.form['nombre']
     correo = request.form['correo']
@@ -105,7 +109,7 @@ def uUsuario(id):
     flash('Usuario Actualizado')
     return redirect('/sUsuario')
 
-@gamezone.route("/dUsuario/<int:id>", methods=['GET', 'POST'])
+@gamezoneApp.route("/dUsuario/<int:id>", methods=['GET', 'POST'])
 def dUsuario(id):
     eliminarusuario = db.connection.cursor()
     eliminarusuario.execute("DELETE FROM usuario WHERE id = %s", (id,))
@@ -113,7 +117,7 @@ def dUsuario(id):
     flash('Usuario Eliminado')
     return redirect('/sUsuario')
 
-@gamezone.route('/sProducto',  methods=['GET', 'POST'])
+@gamezoneApp.route('/sProducto',  methods=['GET', 'POST'])
 def sProducto():
     selProducto=db.connection.cursor()
     selProducto.execute("SELECT * FROM productos")
@@ -122,5 +126,4 @@ def sProducto():
     return render_template('productos.html', productos=p)
 
 if __name__ == '__main__':
-    gamezone.config.from_object(config['development'])
-    gamezone.run(port=3300)
+    gamezoneApp.run(port=3300)

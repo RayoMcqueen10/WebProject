@@ -3,65 +3,84 @@
 {% block contenido %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <i class="fa-brands fa-fantasy-flight-games fa-beat-fade fa-sm" style="color: #a0c224;"></i>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="/">
+        <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01edfe;"></i>
+        NV
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
+          </li>
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+              Dropdown
             </a>
             <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/signup">Registrate</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/signin">Inicia sesión</a><i class="fa-solid fa-user"></i>
-        </li>
-        </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup"><i class="fa-solid fa-person"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
+          </li>
+        </ul> 
         <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+      </div>
     </div>
-    </div>
-</nav>
-<div class="container">
-    <div class="form-background">
-    <form action="/signin" method="post">
-        <input type="email" name="correo" placeholder="Correo">
-        <br>
-        <input type="password" name="clave" placeholder="Contraseña">
-        <br><br>
-        <input type="submit" value="Ingresar">
-    </form>
-        <p class="sign-up-divider">o inicia con</p>
-    <div class="social-media">
-        <ul class="social-media-icons">
-        <li class="facebook"><a href="/static/img/fb.svg"><i class="fab fa-facebook-f"></i></a></li>
-        <li class="twitter"><a href="/static/img/tw.avif"><i class="fab fa-twitter"></i></a></li>
-        </ul>
-    </div> 
-    </div>
-    <div class="login">
-        <p>¿Necesitas una cuenta?<a href="#">Registrarse</a></p>
-    </div>
-</div>
+  </nav>
+  <div class="container">
+    <div class="container col-xxl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-lg-5 py-5">
+          <div class="col-md-10 mx-auto col-lg-5">
+            <form action="/signin" method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+              {% with mensajes  = get_flashed_messages() %}
+            {% if mensajes %}
+            {% for m in mensajes %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <div>
+                {{m}}
+              </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+              <div class="form-floating mb-3">
+                <input type="email" name="correo" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" name="clave" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+              <div class="checkbox mb-3">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Signin</button>
+              <hr class="my-4">
+              <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+            </form>
+          </div>
+        </div>
+  </div>
 {% endblock %}
