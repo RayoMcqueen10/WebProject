@@ -1,100 +1,129 @@
 {% extends 'layout.html'%}
-{% block titulo %}Document{% endblock %}
+{% block titulo %}GMZ - Tu tienda de videojuegos{% endblock %}
 {% block contenido %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01edfe;"></i>
-      NV
+      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> GMZ - Videojuegos
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/ofertas">Ofertas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+          <a class="nav-link" href="/carrito">Carrito</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup"><i class="fa-solid fa-person"></i></a>
+          <a class="nav-link" href="/signup">Registrarse</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
         </li>
-      </ul> 
+      </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>
   </div>
 </nav>
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+
+<!-- Tarjetas de juegos destacados -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <style>
+    .card {
+      max-width: 500px;
+      font-size: 1rem;
+      border: none;
+    }
+
+    .card img {
+      height: auto;
+      max-height: 600px;
+      object-fit: cover;
+    }
+
+    .card-footer {
+      background-color: #f8f9fa;
+    }
+
+    .card-body {
+      background-color: #f1f1f1;
+    }
+  </style>
+
+  <!-- Juego 1 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="{{ url_for('static',filename='/img/Sparking.avif') }}" class="card-img-top" alt="Sparking Zero">
+      <div class="card-body">
+        <h5 class="card-title">Sparking Zero (PS5)</h5>
+        <p class="card-text">Juego de lucha basado en Dragon Ball Z con acción intensa y gráficos espectaculares.</p>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <small class="text-body-secondary">$1,800.00</small>
+        <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Juego 2 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="{{ url_for('static',filename='/img/gta.jpg') }}" class="card-img-top" alt="GTA VI">
+      <div class="card-body">
+        <h5 class="card-title">GTA VI (PS5)</h5>
+        <p class="card-text">Siguiente entrega de la saga de mundo abierto más famosa del mundo.</p>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <small class="text-body-secondary">$1,999.00</small>
+        <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Juego 3 -->
+  <div class="col">
+    <div class="card h-100">
+      <img src="{{ url_for('static',filename='/img/gruty.webp') }}" class="card-img-top" alt="Call of Gruty">
+      <div class="card-body">
+        <h5 class="card-title">Call of Gruty</h5>
+        <p class="card-text">Una franquicia de disparos en primera persona, famosa por sus intensas campañas.</p>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <small class="text-body-secondary">$1,200.00</small>
+        <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<!-- Carrusel de imágenes -->
+<div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{ url_for('static',filename='/img/tianyi-ma-WiONHd_zYI4-unsplash.jpg')}}" class="d-block w-100" alt="...">
+      <img src="{{ url_for('static',filename='/img/Spiderman.webp') }}" class="d-block w-100" style="height: 700px; object-fit: cover;" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{ url_for('static',filename='/img/pcPro (1).jpg')}}" class="d-block w-100" alt="...">
+      <img src="{{ url_for('static',filename='/img/FC25.jpg') }}" class="d-block w-100" style="height: 700px; object-fit: cover;" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{ url_for('static',filename='/img/2.jpg')}}" class="d-block w-100" alt="...">
+      <img src="{{ url_for('static',filename='/img/halo.jpg') }}" class="d-block w-100" style="height: 700px; object-fit: cover;" alt="...">
     </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-body-secondary">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-</div>
-  {% endblock %}
+
+
+{% endblock %}

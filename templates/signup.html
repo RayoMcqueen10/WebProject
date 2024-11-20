@@ -1,69 +1,60 @@
 {% extends 'layout.html'%}
 {% block titulo %}Registrarse{% endblock %}
 {% block contenido %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <i class="fa-brands fa-fantasy-flight-games fa-beat-fade fa-sm" style="color: #a0c224;"></i>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">Registrate</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signin">Inicia sesión</a><i class="fa-solid fa-user"></i>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  <div class="container">
-    <form method="post" action="/signup">
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Nombre</label>
-        <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" aria-describedby="nameHelp">
-        <div id="emailHelp" class="form-text">We'll never share your name with anyone else.</div>
-      </div>  
-      <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" name="correo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" name="clave" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> GMZ - Videojuegos
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+        <li class="nav-item">
+          <a class="nav-link" href="/ofertas">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/carrito">Carrito</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Registrarse</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
+    </div>
   </div>
+</nav>
+<div class="container">
+  <form method="post" action="/signup" class="row g-3">
+    <div class="col-md-6">
+      <label for="nombre" class="form-label">Nombre de Usuario</label>
+      <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingresa tu nombre de usuario">
+    </div>
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Correo Electrónico</label>
+      <input type="email" name="correo" class="form-control" id="inputEmail4" placeholder="example@juegoshd.com">
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Contraseña</label>
+      <input type="password" name="clave" class="form-control" id="inputPassword4" placeholder="Crea una contraseña segura">
+    </div>    
+    <div class="col-12">
+      <label for="terms" class="form-check-label">
+        <input type="checkbox" class="form-check-input" id="terms" required>
+        Acepto los <a href="/terms">Términos y Condiciones</a> de GMZ Games.
+      </label>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-success">Crear Cuenta</button>
+    </div>
+  </form>
+</div>
+
 {% endblock %}

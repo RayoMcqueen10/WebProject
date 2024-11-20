@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block titulo %}Carrito de Compras - GMZ{% endblock %}
+{% block contenido %}
+<div class="container mt-5">
+  <h2>Tu Carrito de Compras</h2>
+  <form action="/actualizar_carrito" method="POST">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Plataforma</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in carrito %}
+        <tr>
+          <td>
+            <img src="{{ url_for('static', filename=item.imagen) }}" class="img-fluid" style="width: 80px;" alt="{{ item.nombre }}">
+            <span>{{ item.nombre }}</span>
+          </td>
+          <td>{{ item.plataforma }}</td>
+          <td>
+            <input type="number" name="cantidad_{{ item.id }}" class="form-control" value="{{ item.cantidad }}" min="1">
+          </td>
+          <td>$ {{ item.precio | round(2) }}</td>
+          <td>$ {{ (item.precio * item.cantidad) | round(2) }}</td>
+          <td>
+            <a href="/eliminar_producto/{{ item.id }}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between mt-3">
+      <h3>Total: $ {{ total | round(2) }}</h3>
+      <button type="submit" class="btn btn-warning">Actualizar Carrito</button>
+    </div>
+  </form>
+
+  <div class="mt-4">
+    <a href="/checkout" class="btn btn-success">Proceder a la compra</a>
+  </div>
+</div>
+{% endblock %}
