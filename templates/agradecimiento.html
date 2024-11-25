@@ -1,11 +1,36 @@
 {% extends 'layout.html'%}
-{% block titulo %}Administrador{% endblock %}
+{% block titulo %}Gracias{% endblock %}
 {% block contenido %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
-        <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01edfe;"></i>
-        NV
+        <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> Gamezone
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+          <li class="nav-item">
+            <a class="nav-link" href="/ofertas">Ofertas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/carrito">Carrito</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Registrarse</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -44,4 +69,7 @@
       </div>
     </div>
   </nav>
+<h2>¡Gracias por tu compra!</h2>
+<p>Hemos recibido tu pedido. Recibirás un correo de confirmación pronto.</p>
+<a href="/" class="btn btn-primary">Volver al inicio</a>
 {% endblock %}

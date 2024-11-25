@@ -1,48 +1,48 @@
 {% extends 'layout.html'%}
 {% block titulo %}Productos{% endblock %}
 {% block contenido %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01edfe;"></i>
-        NV
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> Gamezone
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Operaciones
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Operaciones
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
-              <li><a class="dropdown-item" href="/sProducto">Productos</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" >{{current_user.nombre}}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket" style="color: #00e9fa;"></i></a>
-          </li>
-        </ul> 
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
+        <li><a class="dropdown-item" href="/sProducto">Productos</a></li>
+        <li><a class="dropdown-item" href="/catalogo">Catalogo</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/">Something else here</a></li>
+      </ul>
+    </li>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+        <li class="nav-item">
+          <a class="nav-link" href="/ofertas">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/carrito">Carrito</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Registrarse</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>
   <div class="container">
     {% with mensajes  = get_flashed_messages() %}
     {% if mensajes %}
@@ -57,7 +57,7 @@
     {% endif %}
     {% endwith %}
           <!-- Button insert-->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insert">
+<button type="button" class="btn btn-primary-black" data-bs-toggle="modal" data-bs-target="#insert">
   <i class="fa-solid fa-circle-plus fa-2xl"></i>
 </button>
 
@@ -92,17 +92,17 @@
             <input type="text" name="imagen" class="form-control" id="inputPassword4">
           </div>
           <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Tipo de producto</label>
+            <label for="inputPassword4" class="form-label">Plataforma</label>
             <select name="categoria" class="form-select" aria-label="Default select example">
-              <option selected>Selecciona una categoria.</option>
-              <option value="A">Play Station</option>
-              <option value="U">Xbox</option>
+              <option selected>Selecciona una plataforma</option>
+              <option value="ps5">PS5</option>
+              <option value="xbox">Xbox</option>
             </select>
           </div>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
     </form>
     </div>
@@ -121,16 +121,20 @@
               <button type="button" class="btn btn-outline-black" data-bs-toggle="modal" data-bs-target="#update{{producto.0}}">
                 <i class="fa-solid fa-pen-to-square fa-xl" style="color: #30e0f8;"></i>
               </button>
+              <!-- Button delete-->
+              <button type="button" class="btn btn-outline-black" data-bs-toggle="modal" data-bs-target="#delete{{producto.0}}">
+                <i class="fa-solid fa-trash fa-xl" style="color: #30e0f8;"></i>
+              </button>
 
               <!-- Modal update -->
               <div class="modal fade" id="update{{producto.0}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar producto guapo</h1>
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar producto</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/iProducto" method="post">
+                    <form action="/uProducto/{{producto.0}}" method="post">
                     <div class="modal-body">
                       <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -153,22 +157,46 @@
                           <input type="text" name="imagen" value="{{producto.6}}" class="form-control" id="inputPassword4">
                         </div>
                         <div class="col-md-6">
-                          <label for="inputPassword4" class="form-label">Tipo de producto</label>
+                          <label for="inputPassword4" class="form-label">Categoria</label>
                           <select name="categoria" class="form-select" aria-label="Default select example">
-                            <option selected>Selecciona una plataforma.</option>
-                            <option value="A">Play Station</option>
-                            <option value="U">Xbox</option>
+                            <option selected>Selecciona una categoria.</option>
+                            <option value="accion">Acción</option>
+                            <option value="aventuras">Aventuras</option>
+                            <option value="terror">Terror</option>
+                            <option value="deportes">Deportes</option>
                           </select>
                         </div>
                       </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                   </form>
                   </div>
                 </div>
               </div>
+
+              <!-- Modal delete -->
+            <div class="modal fade" id="delete{{producto.0}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <form action="/dProducto/{{producto.0}}">
+                  <div class="modal-body">
+                    <p><i class="fa-solid fa-circle-exclamation fa-bounce fa-2xl" style="color: #ff0026;"></i>¿Estas seguro de querer eliminar el producto? {{producto.1}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

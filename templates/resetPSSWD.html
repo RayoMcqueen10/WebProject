@@ -1,0 +1,8 @@
+<h2>Restablece tu contraseña</h2>
+<form method="POST" action="{{ url_for('reset_password', token=token) }}">
+    <div class="mb-3">
+        <label for="clave" class="form-label">Nueva contraseña</label>
+        <input type="password" class="form-control" id="clave" name="clave" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar contraseña</button>
+</form>
