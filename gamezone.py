@@ -15,8 +15,8 @@ gamezoneApp = Flask(__name__)
 #python enewere dfdf
 gamezoneApp.config.from_object(config['development'])
 gamezoneApp.config.from_object(config['mail'])
-db=MySQL(gamezoneApp)
-mail=Mail(gamezoneApp)
+db = MySQL(gamezoneApp)
+mail = Mail(gamezoneApp)
 adminSesion = LoginManager(gamezoneApp)
 
 @adminSesion.user_loader
@@ -44,7 +44,7 @@ def signup():
         regUsuario.execute("INSERT INTO usuario (nombre, correo, clave, fechareg) VALUES (%s,%s,%s,%s)",(nombre, correo, claveCifrada, fechareg))
         db.connection.commit()
         msg=Message(subject='Bienvenido a gamezone, disfruta de tus juegos', recipients=[correo])
-        msg.html = render_template('mail.html', nombre=nombre)
+        msg.html = render_template('mail.html', nombre = nombre)
         mail.send(msg)
         return render_template('home.html')
     else:

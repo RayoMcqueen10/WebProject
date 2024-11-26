@@ -1,32 +1,45 @@
 {% extends 'layout.html'%}
 {% block titulo %}Administrador{% endblock %}
 {% block contenido %}
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> GMZ - Videojuegos
+      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #70ff6b;"></i>
+      Gamezone
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/ofertas">Ofertas</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/carrito">Carrito</a>
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Operaciones
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
+            <li><a class="dropdown-item" href="/productos">Productos</a></li>
+            <li><a class="dropdown-item" href="/catalogo">Catalogo</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/">Something else here</a></li>
+          </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Registrarse</a>
+          <a class="nav-link" >{{current_user.nombre}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
+          <a class="nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket" style="color: #00fa1d;"></i></a>
         </li>
-      </ul>
+      </ul> 
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
   </div>
@@ -99,13 +112,13 @@
     <td>
        <!-- Button update -->
        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update{{u.0}}">
-        <i class="fa-solid fa-pen-to-square fa-beat" style="color: #6beeff;"></i>
+        <i class="fa-solid fa-pen-to-square fa-beat" style="color: #70ff6b;"></i>
       </button>
     </td>
     <td>
                         <!-- Button delete -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete{{u.0}}">
-        <i class="fa-solid fa-trash-can" style="color: #49fafd;"></i>
+        <i class="fa-solid fa-trash-can" style="color: #70ff6b;"></i>
       </button>
     </td>
   </tr>
