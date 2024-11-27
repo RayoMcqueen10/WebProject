@@ -35,16 +35,16 @@ def home():
 @gamezoneApp.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method=='POST':
-        titulo=request.form['titulo']
+        nombre=request.form['nombre']
         correo=request.form['correo']
         clave=request.form['clave']
         claveCifrada=generate_password_hash(clave)
         fechareg=datetime.datetime.now()
         regUsuario=db.connection.cursor()
-        regUsuario.execute("INSERT INTO usuario (titulo, correo, clave, fechareg) VALUES (%s,%s,%s,%s)",(titulo, correo, claveCifrada, fechareg))
+        regUsuario.execute("INSERT INTO usuario (nombre, correo, clave, fechareg) VALUES (%s,%s,%s,%s)",(nombre, correo, claveCifrada, fechareg))
         db.connection.commit()
-        msg=Message(subject='Bienvenido a gamezone, disfruta de tus juegos', recipients=[correo])
-        msg.html = render_template('mail.html', titulo = titulo)
+        msg=Message(subject='Bienvenido a gamezone, disfruta de tus tenis', recipients=[correo])
+        msg.html = render_template('mail.html', nombre=nombre)
         mail.send(msg)
         return render_template('home.html')
     else:
@@ -292,9 +292,7 @@ def iProducto():
     categoria = request.form['categoria']
     plataforma = request.form['plataforma']
     existencias = request.form['existencias']
-    imagen = request.form['imagen']
-    
-    
+    imagen = request.form['imagen'] 
     creaProducto= db.connection.cursor()
     creaProducto.execute("INSERT INTO juegos (titulo, descripcion, precio, categoria, plataforma, existencias, imagen) VALUES (%s,%s,%s,%s,%s,%s,%s)", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen))
     db.connection.commit()

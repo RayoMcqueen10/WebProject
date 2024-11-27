@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 26-11-2024 a las 22:21:43
+-- Tiempo de generación: 27-11-2024 a las 15:35:45
 -- Versión del servidor: 5.7.44-log
 -- Versión de PHP: 7.4.9
 
@@ -35,9 +35,15 @@ CREATE TABLE `juegos` (
   `categoria` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `plataforma` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `fechalanz` date NOT NULL,
   `existencias` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `juegos`
+--
+
+INSERT INTO `juegos` (`id`, `imagen`, `titulo`, `descripcion`, `categoria`, `plataforma`, `precio`, `existencias`) VALUES
+(2, 0x7b7b2075726c5f666f722827737461746963272c66696c656e616d653d272f696d672f47656172732e6a70672729207d7d, 'Gears 5', 'Continúa la historia en este emocionante shooter en tercera persona con una narrativa impactante.', 'accion', 'xbox', 1400.00, 4);
 
 --
 -- Índices para tablas volcadas
@@ -57,7 +63,7 @@ ALTER TABLE `juegos`
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
