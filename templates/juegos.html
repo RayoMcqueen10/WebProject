@@ -1,44 +1,45 @@
 {% extends 'layout.html'%}
-{% block titulo %}Productos{% endblock %}
+{% block titulo %}juegos{% endblock %}
 {% block contenido %}
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> Gamezone
+      <i class="fa-solid fa-gamepad fa-fade" style="color: #51f349;"></i>
+      Gamezone
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Operaciones
-      </a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
-        <li><a class="dropdown-item" href="/sProducto">Productos</a></li>
-        <li><a class="dropdown-item" href="/catalogo">Catalogo</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="/">Something else here</a></li>
-      </ul>
-    </li>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">        
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/ofertas">Ofertas</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/carrito">Carrito</a>
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Operaciones
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
+            <li><a class="dropdown-item" href="/sProducto">juegos</a></li>
+            <li><a class="dropdown-item" href="/catalogo">Catalogo</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/">Something else here</a></li>
+          </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Registrarse</a>
+          <a class="nav-link" >{{current_user.titulo}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signin"><i class="fa-regular fa-user"></i></a>
+          <a class="nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket" style="color: #70ff6b;"></i></a>
         </li>
-      </ul>
+      </ul> 
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
   </div>
@@ -72,8 +73,8 @@
       <form action="/iProducto" method="post">
       <div class="modal-body">
         <div class="col-md-6">
-          <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" name="nombre" class="form-control" id="nombre">
+          <label for="titulo" class="form-label">titulo</label>
+          <input type="text" name="titulo" class="form-control" id="titulo">
         </div>
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Description</label>
@@ -93,10 +94,20 @@
           </div>
           <div class="col-md-6">
             <label for="inputPassword4" class="form-label">Plataforma</label>
-            <select name="categoria" class="form-select" aria-label="Default select example">
+            <select name="plataforma" class="form-select" aria-label="Default select example">
               <option selected>Selecciona una plataforma</option>
               <option value="ps5">PS5</option>
               <option value="xbox">Xbox</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Categoria</label>
+            <select name="categoria" class="form-select" aria-label="Default select example">
+              <option selected>Selecciona una categoria</option>
+              <option value="terror">terror</option>
+              <option value="accion">accion</option>
+              <option value="fantasia">fantasía</option>
+              <option value="peleas">peleas</option>
             </select>
           </div>
         </div>
@@ -109,21 +120,21 @@
   </div>
 </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      {% for  producto in productos %}
+      {% for  producto in juegos %}
       <div class="col">
         <div class="card">
-          <img src="/static/img/{{producto.6}}" class="card-img-top" alt="Ups no se encuentra la imagen chiquito papi">
+          <img src="/static/img/{{producto.6}}" class="card-img-top" alt="Ups no se encuentra la imagen">
           <div class="card-body">
             <h5 class="card-title">{{producto.1}}</h5>
             <p class="card-text">{{producto.2}}</p>
             <p class="card-text">{{producto.3}}</p>
               <!-- Button update-->
               <button type="button" class="btn btn-outline-black" data-bs-toggle="modal" data-bs-target="#update{{producto.0}}">
-                <i class="fa-solid fa-pen-to-square fa-xl" style="color: #30e0f8;"></i>
+                <i class="fa-solid fa-pen-to-square fa-xl" style="color: #5fcc28;"></i>
               </button>
               <!-- Button delete-->
               <button type="button" class="btn btn-outline-black" data-bs-toggle="modal" data-bs-target="#delete{{producto.0}}">
-                <i class="fa-solid fa-trash fa-xl" style="color: #30e0f8;"></i>
+                <i class="fa-solid fa-trash fa-xl" style="color: #5fcc28;"></i>
               </button>
 
               <!-- Modal update -->
@@ -137,8 +148,8 @@
                     <form action="/uProducto/{{producto.0}}" method="post">
                     <div class="modal-body">
                       <div class="col-md-6">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" name="nombre" value="{{producto.1}}" class="form-control" id="nombre">
+                        <label for="titulo" class="form-label">titulo</label>
+                        <input type="text" name="titulo" value="{{producto.1}}" class="form-control" id="titulo">
                       </div>
                         <div class="col-md-6">
                           <label for="inputEmail4" class="form-label">Description</label>

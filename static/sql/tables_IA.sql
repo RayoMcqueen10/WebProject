@@ -14,7 +14,7 @@ create table games (
   id bigint primary key generated always as identity,
   title text not null,
   genre text not null,
-  platform text not null check (platform in ('physical', 'digital')),
+  platform text not null check (platform in ('ps5', 'xbox')),
   price numeric(10, 2) not null,
   release_date date not null,
   stock int not null default 0

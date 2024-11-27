@@ -6,7 +6,7 @@
     <title>Gracias por tu compra</title>
 </head>
 <body>
-    <h1>¡Gracias por tu compra, {{ nombre }}!</h1>
+    <h1>¡Gracias por tu compra, {{ titulo }}!</h1>
     <p>Te agradecemos tu preferencia, aquí está el resumen de tu compra:</p>
 
     <table style="width: 100%; border-collapse: collapse;">
@@ -20,13 +20,13 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in productos %}
+            {% for item in juegos %}
             <tr>
                 <td style="border: 1px solid #ddd; padding: 8px;">
                     <img src="{{ request.url_root }}static/img/{{ item.imagen }}"
-                         alt="{{ item.nombre }}" style="width: 100px; height: auto;">
+                         alt="{{ item.titulo }}" style="width: 100px; height: auto;">
                 </td>
-                <td style="border: 1px solid #ddd; padding: 8px;">{{ item.nombre }}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{ item.titulo }}</td>
                 <td style="border: 1px solid #ddd; padding: 8px;">{{ item.cantidad }}</td>
                 <td style="border: 1px solid #ddd; padding: 8px;">${{ item.precio }}</td>
                 <td style="border: 1px solid #ddd; padding: 8px;">${{ item.precio * item.cantidad }}</td>

@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> Gamezone
+      <i class="fa-solid fa-gamepad fa-fade" style="color: #51f349;"></i> Gamezone
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,16 +32,6 @@
   </div>
 </nav>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gamezone - Inicio Sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-</head>
-
 <div class="container">
   <div class="container col-xxl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-center g-lg-5 py-5">
@@ -61,14 +51,23 @@
                   {% endif %}
                   {% endwith %}
                   <h2 class="text-center mb-4" style="font-family: 'Press Start 2P', cursive; color: #4CAF50;">Iniciar Sesión</h2>
-                  <div class="form-floating mb-3">
-                      <input type="email" name="correo" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-                      <label for="floatingInput">Correo Electrónico</label>
+
+                  <!-- Campo de correo con ícono -->
+                  <div class="inputContainer mb-3">
+                      <input type="email" name="correo" class="inputField form-control" id="floatingInput" placeholder="name@example.com">
+                      <div class="inputIcon">
+                          <i class="fa-solid fa-at"></i>
+                      </div>
                   </div>
-                  <div class="form-floating mb-3">
-                      <input type="password" name="clave" class="form-control" id="floatingPassword" placeholder="Password" required>
-                      <label for="floatingPassword">Contraseña</label>
+
+                  <!-- Campo de contraseña con ícono -->
+                  <div class="inputContainer mb-3">
+                      <input type="password" name="clave" class="inputField form-control" id="floatingPassword" placeholder="Password">
+                      <div class="inputIcon">
+                          <i class="fa-solid fa-lock"></i>
+                      </div>
                   </div>
+
                   <div class="checkbox mb-3 text-center">
                       <label style="color: #4CAF50;">
                           <input type="checkbox" value="remember-me"> Recordarme
@@ -85,6 +84,5 @@
       </div>
   </div>
 </div>
-
 
 {% endblock %}

@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `titulo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `clave` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `fechareg` datetime NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `correo`, `clave`, `fechareg`, `perfil`) VALUES
+INSERT INTO `usuario` (`id`, `titulo`, `correo`, `clave`, `fechareg`, `perfil`) VALUES
 (3, 'Pedro Zambrano', 'pedro.cernas1877@alumnos.udg.mx', 'scrypt:32768:8:1$VkCYRAtbefCxbF2y$657819bd8e881912912bd6309f2101d42ce8d81b8cc1025024febf67941a1e7a8dc913bfa8fe7a05f4be5b9c025f0a89c6eabb9d8edc5c54e8dc1257ae4cae06', '2024-10-24 10:59:53', 'A');
 
 --

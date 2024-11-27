@@ -25,7 +25,7 @@ def cargarUsuario(id):
 
 @gamezoneApp.route('/')
 def home():
-    '''if session['NombreU']:
+    '''if session['tituloU']:
         if session['PerfilU'] == 'A':
             return render_template('admin.html')
         else:
@@ -35,16 +35,16 @@ def home():
 @gamezoneApp.route('/signup',methods=['GET','POST'])
 def signup():
     if request.method=='POST':
-        nombre=request.form['nombre']
+        titulo=request.form['titulo']
         correo=request.form['correo']
         clave=request.form['clave']
         claveCifrada=generate_password_hash(clave)
         fechareg=datetime.datetime.now()
         regUsuario=db.connection.cursor()
-        regUsuario.execute("INSERT INTO usuario (nombre, correo, clave, fechareg) VALUES (%s,%s,%s,%s)",(nombre, correo, claveCifrada, fechareg))
+        regUsuario.execute("INSERT INTO usuario (titulo, correo, clave, fechareg) VALUES (%s,%s,%s,%s)",(titulo, correo, claveCifrada, fechareg))
         db.connection.commit()
         msg=Message(subject='Bienvenido a gamezone, disfruta de tus juegos', recipients=[correo])
-        msg.html = render_template('mail.html', nombre = nombre)
+        msg.html = render_template('mail.html', titulo = titulo)
         mail.send(msg)
         return render_template('home.html')
     else:
@@ -58,7 +58,7 @@ def signin():
         usuarioAutenticado =  ModelUser.signin(db,  usuario)
         if usuarioAutenticado is not None:
             login_user(usuarioAutenticado)
-            session['NombreU'] = usuarioAutenticado.nombre
+            session['tituloU'] = usuarioAutenticado.titulo
             session['Perfil.U']  = usuarioAutenticado.perfil
             if  usuarioAutenticado.clave:
                 if usuarioAutenticado.perfil == 'A':
@@ -146,28 +146,28 @@ def sUsuario():
 
 @gamezoneApp.route('/iUsuario', methods=['GET', 'POST'])
 def iUsuario():
-    nombre = request.form['nombre']
+    titulo = request.form['titulo']
     correo = request.form['correo']
     clave = request.form['clave']
     claveCifrada = generate_password_hash(clave)
     fechareg = datetime.datetime.now()
     perfil = request.form['perfil']
     creaUsuario= db.connection.cursor()
-    creaUsuario.execute("INSERT INTO usuario (nombre, correo, clave, fechareg, perfil) VALUES (%s,%s,%s,%s,%s)", (nombre, correo, claveCifrada, fechareg, perfil))
+    creaUsuario.execute("INSERT INTO usuario (titulo, correo, clave, fechareg, perfil) VALUES (%s,%s,%s,%s,%s)", (titulo, correo, claveCifrada, fechareg, perfil))
     db.connection.commit()
     flash('usuario creado')
     return redirect('/sUsuario')
 
 @gamezoneApp.route('/uUsuario/<int:id>', methods=['GET', 'POST'])
 def uUsuario(id):
-    nombre = request.form['nombre']
+    titulo = request.form['titulo']
     correo = request.form['correo']
     clave = request.form['clave']
     claveCifrada = generate_password_hash(clave)
     fechareg = datetime.datetime.now()
     perfil = request.form['perfil']
     editarUsuario= db.connection.cursor()
-    editarUsuario.execute("UPDATE usuario SET nombre=%s, correo=%s, clave=%s, fechareg=%s, perfil=%s WHERE id=%s", (nombre, correo, claveCifrada, fechareg, perfil, id))
+    editarUsuario.execute("UPDATE usuario SET titulo=%s, correo=%s, clave=%s, fechareg=%s, perfil=%s WHERE id=%s", (titulo, correo, claveCifrada, fechareg, perfil, id))
     db.connection.commit()
     flash('Usuario Actualizado')
     return redirect('/sUsuario')
@@ -183,37 +183,37 @@ def dUsuario(id):
 @gamezoneApp.route('/sProducto',  methods=['GET', 'POST'])
 def sProducto():
     selProducto=db.connection.cursor()
-    selProducto.execute("SELECT * FROM productos")
+    selProducto.execute("SELECT * FROM juegos")
     p=selProducto.fetchall()
     selProducto.close()
-    return render_template('productos.html', productos=p)
+    return render_template('juegos.html', juegos=p)
 
 @gamezoneApp.route('/catalogo',  methods=['GET', 'POST'])
 def catalogo():
     selcat=db.connection.cursor()
-    selcat.execute("SELECT * FROM productos")
+    selcat.execute("SELECT * FROM juegos")
     c=selcat.fetchall()
     selcat.close()
-    return render_template('user.html', productos=c)
+    return render_template('user.html', juegos=c)
 
 @gamezoneApp.route('/add-to-cart', methods=['POST'])
 def add_to_cart():
-    idp=int(request.form['idproducto'])
+    idp=int(request.form['id'])
     selProducto=db.connection.cursor()
-    selProducto.execute("SELECT idproducto, nombre, precio, imagen FROM productos WHERE idproducto = %s", (idp,))
+    selProducto.execute("SELECT id, titulo, precio, imagen FROM juegos WHERE id = %s", (idp,))
     pc=selProducto.fetchone()
     selProducto.close()
     if not pc:
         return redirect('/catalogo')
     cart = session.get('cart', [])
     for item in cart:
-        if item['idproducto'] == idp:
+        if item['id'] == idp:
             item['cantidad'] += 1
             break
     else:
         cart.append({
-            'idproducto': pc[0],
-            'nombre': pc[1],
+            'id': pc[0],
+            'titulo': pc[1],
             'precio': pc[2],
             'imagen': pc[3],
             'cantidad': 1
@@ -223,9 +223,9 @@ def add_to_cart():
 
 @gamezoneApp.route('/remove-from-cart', methods=['POST'])
 def remove_from_cart():
-    idp = int(request.form['idproducto'])
+    idp = int(request.form['id'])
     cart = session.get('cart', [])
-    session['cart'] = [item for item in cart if item['idproducto'] != idp]
+    session['cart'] = [item for item in cart if item['id'] != idp]
     return redirect('/view_cart')
 
 @gamezoneApp.route('/checkout', methods=['GET', 'POST'])
@@ -234,14 +234,14 @@ def checkout():
         tarjeta = request.form['tarjeta']
         vencimiento = request.form['vencimiento']
         cvv = request.form['cvv']
-        nombre_titular = request.form['nombre_titular']
+        titulo_titular = request.form['titulo_titular']
         return redirect('/direccion')
     return render_template('checkout.html')
 
 @gamezoneApp.route('/direccion', methods=['GET', 'POST'])
 def direccion():
     if request.method == 'POST':
-        nombre = request.form['nombre']
+        titulo = request.form['titulo']
         direccion = request.form['direccion']
         ciudad = request.form['ciudad']
         codigopostal = request.form['codigopostal']
@@ -249,7 +249,7 @@ def direccion():
         cart=session.get('cart', [])
         total=sum(item['precio'] * item['cantidad'] for item in cart)
         msg=Message(subject='Gracias por tu compra', recipients=[correo])
-        msg.html = render_template('mail2.html', nombre=nombre, productos=cart, total=total)
+        msg.html = render_template('mail2.html', titulo=titulo, juegos=cart, total=total)
         mail.send(msg)
         return redirect('/gracias')
     return render_template('direccion.html')
@@ -276,38 +276,42 @@ def search():
     query = request.args.get('query', '')
     if query:
         selProducto = db.connection.cursor()
-        selProducto.execute("SELECT * FROM productos WHERE nombre LIKE %s", ('%' + query + '%',))
-        productos = selProducto.fetchall()
+        selProducto.execute("SELECT * FROM juegos WHERE titulo LIKE %s", ('%' + query + '%',))
+        juegos = selProducto.fetchall()
         selProducto.close()
     else:
-        productos = []
+        juegos = []
     
-    return render_template('user.html', productos=productos)
+    return render_template('user.html', juegos=juegos)
 
 @gamezoneApp.route('/iProducto', methods=['GET', 'POST'])
 def iProducto():
-    nombre = request.form['nombre']
+    titulo = request.form['titulo']
     descripcion = request.form['descripcion']
     precio = request.form['precio']
     categoria = request.form['categoria']
+    plataforma = request.form['plataforma']
     existencias = request.form['existencias']
     imagen = request.form['imagen']
+    
+    
     creaProducto= db.connection.cursor()
-    creaProducto.execute("INSERT INTO productos (nombre, descripcion, precio, categoria, existencias, imagen) VALUES (%s,%s,%s,%s,%s,%s)", (nombre, descripcion, precio, categoria, existencias, imagen))
+    creaProducto.execute("INSERT INTO juegos (titulo, descripcion, precio, categoria, plataforma, existencias, imagen) VALUES (%s,%s,%s,%s,%s,%s,%s)", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen))
     db.connection.commit()
     flash('Producto creado')
     return redirect('/sProducto')
 
 @gamezoneApp.route('/uProducto/<int:id>', methods=['GET', 'POST'])
 def uProducto(id):
-    nombre = request.form['nombre']
+    titulo = request.form['titulo']
     descripcion = request.form['descripcion']
     precio = request.form['precio']
     categoria = request.form['categoria']
+    plataforma = request.form['plataforma']
     existencias = request.form['existencias']
     imagen = request.form['imagen']
     editarProducto= db.connection.cursor()
-    editarProducto.execute("UPDATE productos SET nombre=%s, descripcion=%s, precio=%s, categoria=%s, existencias=%s, imagen=%s WHERE idproducto=%s", (nombre, descripcion, precio, categoria, existencias, imagen, id))
+    editarProducto.execute("UPDATE juegos SET titulo=%s, descripcion=%s, precio=%s, categoria=%s, plataforma=%s, existencias=%s, imagen=%s WHERE id=%s", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen, id))
     db.connection.commit()
     flash('Producto Actualizado')
     return redirect('/sProducto')
@@ -315,10 +319,12 @@ def uProducto(id):
 @gamezoneApp.route("/dProducto/<int:id>", methods=['GET', 'POST'])
 def dProducto(id):
     eliminarProducto = db.connection.cursor()
-    eliminarProducto.execute("DELETE FROM productos WHERE idproducto = %s", (id,))
+    eliminarProducto.execute("DELETE FROM juegos WHERE id = %s", (id,))
     db.connection.commit()
     flash('Producto Eliminado')
     return redirect('/sProducto')
+
+
 
 '''
 if __name__ == '__main__':

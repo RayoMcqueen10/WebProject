@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #70ff6b;"></i>
+      <i class="fa-solid fa-gamepad fa-fade" style="color: #51f349;"></i>
       Gamezone
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,14 +24,14 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/sUsuario">Usuarios</a></li>
-            <li><a class="dropdown-item" href="/productos">Productos</a></li>
+            <li><a class="dropdown-item" href="/juegos">juegos</a></li>
             <li><a class="dropdown-item" href="/catalogo">Catalogo</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/">Something else here</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" >{{current_user.nombre}}</a>
+          <a class="nav-link" >{{current_user.titulo}}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket" style="color: #00fa1d;"></i></a>
@@ -49,7 +49,7 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Nombre</th>
+        <th scope="col">titulo</th>
         <th scope="col">Correo</th>
         <th scope="col">Fechareg</th>
         <th scope="col">Perfil</th>
@@ -72,8 +72,8 @@
     <form action="/iUsuario" method="post">
     <div class="modal-body">
       <div class="col-md-6">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" name="nombre" class="form-control" id="nombre">
+        <label for="titulo" class="form-label">titulo</label>
+        <input type="text" name="titulo" class="form-control" id="titulo">
       </div>
         <div class="col-md-6">
           <label for="inputEmail4" class="form-label">Email</label>
@@ -133,8 +133,8 @@
       <form action="/uUsuario/{{u.0}}" method="post">
       <div class="modal-body">
         <div class="col-md-6">
-          <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" name="nombre" value="{{u.1}}" class="form-control" id="nombre">
+          <label for="titulo" class="form-label">titulo</label>
+          <input type="text" name="titulo" value="{{u.1}}" class="form-control" id="titulo">
         </div>
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Email</label>

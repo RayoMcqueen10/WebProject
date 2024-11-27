@@ -5,7 +5,7 @@
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
-        <i class="fa-solid fa-dice-d20 fa-beat-fade fa-2xl" style="color: #01fe34;"></i> Gamezone
+        <i class="fa-solid fa-gamepad fa-fade" style="color: #51f349;"></i> Gamezone
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
             <a class="nav-link" href="/signup">Registrarse</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" >{{current_user.nombre}}</a>
+            <a class="nav-link" >{{current_user.titulo}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/signout"><i class="fa-solid fa-right-from-bracket" style="color: #70ff6b;"></i></a>
@@ -117,8 +117,11 @@
       <p class="card-text">Juego de lucha basado en Dragon Ball Z con acción intensa y gráficos espectaculares.</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <small class="text-body-secondary">$1,800.00</small>
-      <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      <small class="text-body-secondary">$1800.00</small>
+      <form action="{{ url_for('add_to_cart') }}" method="post">
+        <input type="hidden" name="id" value="1">
+        <button type="submit" class="btn btn-success btn-sm">Añadir al carrito</button>
+      </form>
     </div>
   </div>
 </div>
@@ -132,8 +135,11 @@
       <p class="card-text">Siguiente entrega de la saga de mundo abierto más famosa del mundo.</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <small class="text-body-secondary">$1,999.00</small>
-      <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      <small class="text-body-secondary">$1999.00</small>
+      <form action="{{ url_for('add_to_cart') }}" method="post">
+        <input type="hidden" name="id" value="2">
+        <button type="submit" class="btn btn-success btn-sm">Añadir al carrito</button>
+      </form>
     </div>
   </div>
 </div>
@@ -147,8 +153,11 @@
       <p class="card-text">Una franquicia de disparos en primera persona, famosa por sus intensas campañas.</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <small class="text-body-secondary">$1,200.00</small>
-      <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      <small class="text-body-secondary">$1200.00</small>
+      <form action="{{ url_for('add_to_cart') }}" method="post">
+        <input type="hidden" name="id" value="3">
+        <button type="submit" class="btn btn-success btn-sm">Añadir al carrito</button>
+      </form>
     </div>
   </div>
 </div>
@@ -156,14 +165,17 @@
 <!-- Juego 4 -->
 <div class="col">
   <div class="card h-100">
-    <img src="{{ url_for('static', filename='/img/Halo_Infinite.png') }}" class="card-img-top" alt="Halo Infinite">
+    <img src="{{ url_for('static',filename='/img/Halo_Infinite.png') }}" class="card-img-top" alt="Halo Infinite">
     <div class="card-body">
       <h5 class="card-title">Halo Infinite (Xbox)</h5>
       <p class="card-text">Únete al Jefe Maestro en una nueva aventura en esta épica saga de ciencia ficción y disparos.</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <small class="text-body-secondary">$1,500.00</small>
-      <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      <small class="text-body-secondary">$1500.00</small>
+      <form action="{{ url_for('add_to_cart') }}" method="post">
+        <input type="hidden" name="id" value="4">
+        <button type="submit" class="btn btn-success btn-sm">Añadir al carrito</button>
+      </form>
     </div>
   </div>
 </div>
@@ -171,14 +183,17 @@
 <!-- Juego 5 -->
 <div class="col">
   <div class="card h-100">
-    <img src="{{ url_for('static', filename='/img/Forza.png') }}" class="card-img-top" alt="Forza Horizon 5">
+    <img src="{{ url_for('static',filename='/img/Forza.png') }}" class="card-img-top" alt="Forza Horizon 5">
     <div class="card-body">
       <h5 class="card-title">Forza Horizon 5 (Xbox)</h5>
       <p class="card-text">Experimenta la emoción de las carreras en el mundo abierto de México con increíbles gráficos y desafíos.</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <small class="text-body-secondary">$1,300.00</small>
-      <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      <small class="text-body-secondary">$1300.00</small>
+      <form action="{{ url_for('add_to_cart') }}" method="post">
+        <input type="hidden" name="id" value="5">
+        <button type="submit" class="btn btn-success btn-sm">Añadir al carrito</button>
+      </form>
     </div>
   </div>
 </div>
@@ -186,14 +201,17 @@
 <!-- Juego 6 -->
 <div class="col">
   <div class="card h-100">
-    <img src="{{ url_for('static', filename='/img/Gears.jpg') }}" class="card-img-top" alt="Gears 5">
+    <img src="{{ url_for('static',filename='/img/Gears.jpg') }}" class="card-img-top" alt="Gears 5">
     <div class="card-body">
       <h5 class="card-title">Gears 5 (Xbox)</h5>
       <p class="card-text">Continúa la historia en este emocionante shooter en tercera persona con una narrativa impactante.</p>
     </div>
     <div class="card-footer d-flex justify-content-between">
-      <small class="text-body-secondary">$1,400.00</small>
-      <button class="btn btn-success btn-sm">Añadir al carrito</button>
+      <small class="text-body-secondary">$1400.00</small>
+      <form action="{{ url_for('add_to_cart') }}" method="post">
+        <input type="hidden" name="id" value="6">
+        <button type="submit" class="btn btn-success btn-sm">Añadir al carrito</button>
+      </form>
     </div>
   </div>
 </div>
