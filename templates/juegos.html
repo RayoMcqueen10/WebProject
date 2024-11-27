@@ -70,56 +70,77 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar producto</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="/iProducto" method="post">
-      <div class="modal-body">
-        <div class="col-md-6">
-          <label for="imagen" class="form-label">Imagen</label>
-          <input type="text" name="imagen" class="form-control" id="imagen">
+      
+      <!-- Agregado enctype para manejo de imagenes tipo blob -->
+      <form action="/iProducto" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="row">
+            <!-- Imagen (URL) -->
+            <div class="col-md-12 mb-3">
+              <label for="imagen" class="form-label">Imagen (URL)</label>
+              <input type="text" name="imagen" class="form-control" id="imagen" required>
+            </div>
+
+            <!-- Título -->
+            <div class="col-md-12 mb-3">
+              <label for="titulo" class="form-label">Título</label>
+              <input type="text" name="titulo" class="form-control" id="titulo" required>
+            </div>
+
+            <!-- Descripción -->
+            <div class="col-md-12 mb-3">
+              <label for="descripcion" class="form-label">Descripción</label>
+              <textarea name="descripcion" class="form-control" id="descripcion" rows="3" required></textarea>
+            </div>
+
+            <!-- Categoría -->
+            <div class="col-md-12 mb-3">
+              <label for="categoria" class="form-label">Categoría</label>
+              <select name="categoria" class="form-select" id="categoria" required>
+                <option selected disabled>Selecciona una categoría</option>
+                <option value="terror">Terror</option>
+                <option value="accion">Acción</option>
+                <option value="fantasia">Fantasía</option>
+                <option value="peleas">Peleas</option>
+              </select>
+            </div>
+
+            <!-- Plataforma -->
+            <div class="col-md-12 mb-3">
+              <label for="plataforma" class="form-label">Plataforma</label>
+              <select name="plataforma" class="form-select" id="plataforma" required>
+                <option selected disabled>Selecciona una plataforma</option>
+                <option value="ps5">PS5</option>
+                <option value="xbox">Xbox</option>
+              </select>
+            </div>
+
+            <!-- Precio -->
+            <div class="col-md-6 mb-3">
+              <label for="precio" class="form-label">Precio</label>
+              <input type="number" step="0.01" name="precio" class="form-control" id="precio" required>
+            </div>
+
+            <!-- Existencias -->
+            <div class="col-md-6 mb-3">
+              <label for="existencias" class="form-label">Existencias</label>
+              <input type="number" name="existencias" class="form-control" id="existencias" required>
+            </div>
+          </div>
         </div>
-          <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Titulo</label>
-            <input type="text" name="titulo" class="form-control" id="inputEmail4">
-          </div>
-          <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Descripcion</label>
-            <input type="text" name="descripcion" class="form-control" id="inputEmail4">
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Categoria</label>
-            <select name="categoria" class="form-select" aria-label="Default select example">
-              <option selected>Selecciona una categoria</option>
-              <option value="terror">terror</option>
-              <option value="accion">accion</option>
-              <option value="fantasia">fantasía</option>
-              <option value="peleas">peleas</option>
-            </select>
-          </div>       
-          <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Plataforma</label>
-            <input type="text" name="plataforma" class="form-control" id="inputPassword4">
-            <option selected>Selecciona una plataforma</option>
-            <option value="ps5">PS5</option>
-            <option value="xbox">Xbox</option>
-          </select>
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Precio</label>
-            <select name="precio" class="form-select" aria-label="Default select example">            
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Existencias</label>
-            <select name="existencias" class="form-select" aria-label="Default select example">            
-          </div>
-         
+
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
+      </form>
     </div>
   </div>
 </div>
+
+
+
     <div class="row row-cols-1 row-cols-md-3 g-4">
       {% for  producto in juegos %}
       <div class="col">
@@ -149,7 +170,7 @@
                     <form action="/uProducto/{{producto.0}}" method="post">
                     <div class="modal-body">
                       <div class="col-md-6">
-                        <label for="imagen" class="form-label">Imagen</label>
+                        <label for="imagen" class="form-label">Imagen (URL)</label>
                         <input type="text" name="titulo" value="{{producto.1}}" class="form-control" id="titulo">
                       </div>
                         <div class="col-md-6">
