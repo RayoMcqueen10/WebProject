@@ -180,12 +180,12 @@ def dUsuario(id):
     flash('Usuario Eliminado')
     return redirect('/sUsuario')
 
-@gamezoneApp.route('/sProducto',  methods=['GET', 'POST'])
-def sProducto():
-    selProducto=db.connection.cursor()
-    selProducto.execute("SELECT * FROM juegos")
-    p=selProducto.fetchall()
-    selProducto.close()
+@gamezoneApp.route('/sjuegos',  methods=['GET', 'POST'])
+def sjuegos():
+    seljuegos=db.connection.cursor()
+    seljuegos.execute("SELECT * FROM juegos")
+    p=seljuegos.fetchall()
+    seljuegos.close()
     return render_template('juegos.html', juegos=p)
 
 @gamezoneApp.route('/catalogo',  methods=['GET', 'POST'])
@@ -199,10 +199,10 @@ def catalogo():
 @gamezoneApp.route('/add-to-cart', methods=['POST'])
 def add_to_cart():
     idp=int(request.form['id'])
-    selProducto=db.connection.cursor()
-    selProducto.execute("SELECT id, titulo, precio, imagen FROM juegos WHERE id = %s", (idp,))
-    pc=selProducto.fetchone()
-    selProducto.close()
+    seljuegos=db.connection.cursor()
+    seljuegos.execute("SELECT id, titulo, precio, imagen FROM juegos WHERE id = %s", (idp,))
+    pc=seljuegos.fetchone()
+    seljuegos.close()
     if not pc:
         return redirect('/catalogo')
     cart = session.get('cart', [])
@@ -275,17 +275,17 @@ def view_cart():
 def search():
     query = request.args.get('query', '')
     if query:
-        selProducto = db.connection.cursor()
-        selProducto.execute("SELECT * FROM juegos WHERE titulo LIKE %s", ('%' + query + '%',))
-        juegos = selProducto.fetchall()
-        selProducto.close()
+        seljuegos = db.connection.cursor()
+        seljuegos.execute("SELECT * FROM juegos WHERE titulo LIKE %s", ('%' + query + '%',))
+        juegos = seljuegos.fetchall()
+        seljuegos.close()
     else:
         juegos = []
     
     return render_template('user.html', juegos=juegos)
 
-@gamezoneApp.route('/iProducto', methods=['GET', 'POST'])
-def iProducto():
+@gamezoneApp.route('/ijuegos', methods=['GET', 'POST'])
+def ijuegos():
     titulo = request.form['titulo']
     descripcion = request.form['descripcion']
     precio = request.form['precio']
@@ -293,14 +293,14 @@ def iProducto():
     plataforma = request.form['plataforma']
     existencias = request.form['existencias']
     imagen = request.form['imagen'] 
-    creaProducto= db.connection.cursor()
-    creaProducto.execute("INSERT INTO juegos (titulo, descripcion, precio, categoria, plataforma, existencias, imagen) VALUES (%s,%s,%s,%s,%s,%s,%s)", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen))
+    creajuegos= db.connection.cursor()
+    creajuegos.execute("INSERT INTO juegos (titulo, descripcion, precio, categoria, plataforma, existencias, imagen) VALUES (%s,%s,%s,%s,%s,%s,%s)", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen))
     db.connection.commit()
-    flash('Producto creado')
-    return redirect('/sProducto')
+    flash('juegos creado')
+    return redirect('/sjuegos')
 
-@gamezoneApp.route('/uProducto/<int:id>', methods=['GET', 'POST'])
-def uProducto(id):
+@gamezoneApp.route('/ujuegos/<int:id>', methods=['GET', 'POST'])
+def ujuegos(id):
     titulo = request.form['titulo']
     descripcion = request.form['descripcion']
     precio = request.form['precio']
@@ -308,19 +308,19 @@ def uProducto(id):
     plataforma = request.form['plataforma']
     existencias = request.form['existencias']
     imagen = request.form['imagen']
-    editarProducto= db.connection.cursor()
-    editarProducto.execute("UPDATE juegos SET titulo=%s, descripcion=%s, precio=%s, categoria=%s, plataforma=%s, existencias=%s, imagen=%s WHERE id=%s", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen, id))
+    editarjuegos= db.connection.cursor()
+    editarjuegos.execute("UPDATE juegos SET titulo=%s, descripcion=%s, precio=%s, categoria=%s, plataforma=%s, existencias=%s, imagen=%s WHERE id=%s", (titulo, descripcion, precio, categoria, plataforma, existencias, imagen, id))
     db.connection.commit()
-    flash('Producto Actualizado')
-    return redirect('/sProducto')
+    flash('juegos Actualizado')
+    return redirect('/sjuegos')
 
-@gamezoneApp.route("/dProducto/<int:id>", methods=['GET', 'POST'])
-def dProducto(id):
-    eliminarProducto = db.connection.cursor()
-    eliminarProducto.execute("DELETE FROM juegos WHERE id = %s", (id,))
+@gamezoneApp.route("/djuegos/<int:id>", methods=['GET', 'POST'])
+def djuegos(id):
+    eliminarjuegos = db.connection.cursor()
+    eliminarjuegos.execute("DELETE FROM juegos WHERE id = %s", (id,))
     db.connection.commit()
-    flash('Producto Eliminado')
-    return redirect('/sProducto')
+    flash('juegos Eliminado')
+    return redirect('/sjuegos')
 
 
 
